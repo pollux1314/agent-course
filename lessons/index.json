@@ -1,0 +1,175 @@
+{
+  "title": "90 天 Agent 开发课",
+  "student": "Jiawei",
+  "startDate": "2026-10-16",
+  "updated": "2026-10-20",
+  "phases": [
+    {
+      "id": 1,
+      "title": "Python 补强 + 大模型 API 基础",
+      "range": [
+        1,
+        14
+      ],
+      "goal": "能熟练用 Python 调用大模型，掌握流式输出、结构化输出和 function calling",
+      "deliverable": "命令行聊天助手（多轮对话 + 流式输出 + 2~3 个工具）"
+    },
+    {
+      "id": 2,
+      "title": "从零手写 Agent",
+      "range": [
+        15,
+        28
+      ],
+      "goal": "不用框架手写 Agent 循环（ReAct、工具报错与最大步数、上下文管理、任务规划）",
+      "deliverable": "能读写本地文件、执行命令的小助手 Agent（极简版编程助手）"
+    },
+    {
+      "id": 3,
+      "title": "RAG 和记忆",
+      "range": [
+        29,
+        42
+      ],
+      "goal": "Embedding 与向量相似度、向量数据库与文档切分、完整 RAG（rerank、混合检索）、长期记忆分层",
+      "deliverable": "能回答公司内部文档问题的知识库 Agent"
+    },
+    {
+      "id": 4,
+      "title": "框架和协议",
+      "range": [
+        43,
+        56
+      ],
+      "goal": "LangGraph 状态图编排、MCP 协议与自写 MCP Server、多 Agent 协作、人在回路",
+      "deliverable": "用 LangGraph 重写第 2 阶段的 Agent，并接入自己的 MCP Server"
+    },
+    {
+      "id": 5,
+      "title": "工程化（你的主场）",
+      "range": [
+        57,
+        70
+      ],
+      "goal": "评估（eval、模型当裁判）、可观测性（Langfuse / LangSmith）、可靠性（重试、超时、降级、缓存）、安全（prompt 注入、权限、沙箱）",
+      "deliverable": "给 Agent 加上评估集、链路追踪和一份成本报告"
+    },
+    {
+      "id": 6,
+      "title": "毕业项目",
+      "range": [
+        71,
+        90
+      ],
+      "goal": "选题设计 → FastAPI / Spring AI 开发 → 评估调优压测 → Docker 部署 + 技术博客",
+      "deliverable": "运维排障 / 代码评审 / 数据分析 Agent 任选其一，上线并整理成作品集"
+    }
+  ],
+  "lessons": [
+    {
+      "day": 1,
+      "phase": 1,
+      "title": "环境搭建",
+      "file": "day01.md",
+      "status": "ready",
+      "summary": "uv（类比 Maven）、agent-lab 项目、python-dotenv、httpx"
+    },
+    {
+      "day": 2,
+      "phase": 1,
+      "title": "Python 关键语法（用 Java 对照学）",
+      "file": "day02.md",
+      "status": "ready",
+      "summary": "dataclass、推导式、with、装饰器、异常、模块（Java 对照）"
+    },
+    {
+      "day": 3,
+      "phase": 1,
+      "title": "async 与 pydantic",
+      "file": "day03.md",
+      "status": "ready",
+      "summary": "asyncio.gather、httpx 异步请求、pydantic 校验"
+    },
+    {
+      "day": 4,
+      "phase": 1,
+      "title": "第一次调用大模型",
+      "file": "day04.md",
+      "status": "ready",
+      "summary": "openai SDK + DeepSeek，messages 三种角色，.env 管理密钥"
+    },
+    {
+      "day": 5,
+      "phase": 1,
+      "title": "参数与计费",
+      "file": "day05.md",
+      "status": "ready",
+      "summary": "temperature / top_p / max_tokens，token 与 tiktoken，成本估算"
+    },
+    {
+      "day": 6,
+      "phase": 1,
+      "title": "流式输出与多轮对话",
+      "file": "day06.md",
+      "status": "outline",
+      "summary": "stream=True，逐字打印回答"
+    },
+    {
+      "day": 7,
+      "phase": 1,
+      "title": "周复盘 + 缓冲",
+      "file": "day07.md",
+      "status": "outline",
+      "summary": "补前 6 天没完成的内容，整理笔记"
+    },
+    {
+      "day": 8,
+      "phase": 1,
+      "title": "Prompt 基础",
+      "file": "day08.md",
+      "status": "outline",
+      "summary": "system prompt 设定角色和规则；清晰指令、分隔符、给出步骤"
+    },
+    {
+      "day": 9,
+      "phase": 1,
+      "title": "结构化输出",
+      "file": "day09.md",
+      "status": "outline",
+      "summary": "让模型稳定输出 JSON：JSON mode / response_format"
+    },
+    {
+      "day": 10,
+      "phase": 1,
+      "title": "Function calling 原理",
+      "file": "day10.md",
+      "status": "outline",
+      "summary": "tools 参数怎么写（JSON Schema 描述函数）"
+    },
+    {
+      "day": 11,
+      "phase": 1,
+      "title": "多工具与并行调用",
+      "file": "day11.md",
+      "status": "outline",
+      "summary": "同时注册多个工具，让模型自己选"
+    },
+    {
+      "day": 12,
+      "phase": 1,
+      "title": "工具的健壮性",
+      "file": "day12.md",
+      "status": "outline",
+      "summary": "参数校验、工具执行报错时怎么把错误告诉模型"
+    },
+    {
+      "day": 13,
+      "phase": 1,
+      "title": "阶段项目",
+      "file": "day13.md",
+      "dayEnd": 14,
+      "status": "outline",
+      "summary": "整合成命令行助手：多轮对话 + 流式输出 + 至少 3 个工具（如天气、计算、查"
+    }
+  ]
+}
