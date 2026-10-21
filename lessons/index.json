@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "phases": [
     {
       "id": 1,
@@ -111,8 +111,8 @@
       "phase": 1,
       "title": "流式输出与多轮对话",
       "file": "day06.md",
-      "status": "outline",
-      "summary": "stream=True，逐字打印回答"
+      "status": "ready",
+      "summary": "stream=True 逐字输出（AsyncOpenAI），自己维护 messages 实现多轮记忆"
     },
     {
       "day": 7,
