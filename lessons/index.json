@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "phases": [
     {
       "id": 1,
@@ -119,8 +119,8 @@
       "phase": 1,
       "title": "周复盘 + 缓冲",
       "file": "day07.md",
-      "status": "outline",
-      "summary": "补前 6 天没完成的内容，整理笔记"
+      "status": "ready",
+      "summary": "一周知识地图、ChatSession 综合例子（按 token 裁剪历史）、找 Bug 题、补练习"
     },
     {
       "day": 8,
