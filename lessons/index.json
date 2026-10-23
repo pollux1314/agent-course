@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-22",
+  "updated": "2026-10-23",
   "phases": [
     {
       "id": 1,
@@ -127,8 +127,8 @@
       "phase": 1,
       "title": "Prompt 基础",
       "file": "day08.md",
-      "status": "outline",
-      "summary": "system prompt 设定角色和规则；清晰指令、分隔符、给出步骤"
+      "status": "ready",
+      "summary": "system 规则、分隔符、few-shot，像写 JUnit 一样测 prompt"
     },
     {
       "day": 9,
