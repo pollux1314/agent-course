@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-23",
+  "updated": "2026-10-24",
   "phases": [
     {
       "id": 1,
@@ -135,8 +135,8 @@
       "phase": 1,
       "title": "结构化输出",
       "file": "day09.md",
-      "status": "outline",
-      "summary": "让模型稳定输出 JSON：JSON mode / response_format"
+      "status": "ready",
+      "summary": "JSON mode + pydantic 校验 + 失败重试，从简历抽取结构化信息"
     },
     {
       "day": 10,
