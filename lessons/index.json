@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-24",
+  "updated": "2026-10-25",
   "phases": [
     {
       "id": 1,
@@ -143,8 +143,8 @@
       "phase": 1,
       "title": "Function calling 原理",
       "file": "day10.md",
-      "status": "outline",
-      "summary": "tools 参数怎么写（JSON Schema 描述函数）"
+      "status": "ready",
+      "summary": "tools 的 JSON Schema + tool_calls 往返：查天气完整例子"
     },
     {
       "day": 11,
