@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-25",
+  "updated": "2026-10-26",
   "phases": [
     {
       "id": 1,
@@ -151,8 +151,8 @@
       "phase": 1,
       "title": "多工具与并行调用",
       "file": "day11.md",
-      "status": "outline",
-      "summary": "同时注册多个工具，让模型自己选"
+      "status": "ready",
+      "summary": "多个工具让模型自己选 + 并发执行多个 tool_calls + 循环到不再要工具"
     },
     {
       "day": 12,
