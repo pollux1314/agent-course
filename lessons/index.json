@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-26",
+  "updated": "2026-10-27",
   "phases": [
     {
       "id": 1,
@@ -159,8 +159,8 @@
       "phase": 1,
       "title": "工具的健壮性",
       "file": "day12.md",
-      "status": "outline",
-      "summary": "参数校验、工具执行报错时怎么把错误告诉模型"
+      "status": "ready",
+      "summary": "参数校验 + 错误回传让模型自我纠正 + 超时 + 防死循环"
     },
     {
       "day": 13,
