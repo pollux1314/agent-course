@@ -2,7 +2,7 @@
   "title": "90 天 Agent 开发课",
   "student": "Jiawei",
   "startDate": "2026-10-16",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "phases": [
     {
       "id": 1,
@@ -165,11 +165,11 @@
     {
       "day": 13,
       "phase": 1,
-      "title": "阶段项目",
+      "title": "阶段项目：命令行助手",
       "file": "day13.md",
-      "dayEnd": 14,
-      "status": "outline",
-      "summary": "整合成命令行助手：多轮对话 + 流式输出 + 至少 3 个工具（如天气、计算、查"
+      "status": "ready",
+      "summary": "多轮对话 + 流式输出 + 3 个工具；流式 tool_calls 按 index 拼接；拆成 llm/tools/main",
+      "dayEnd": 14
     }
   ]
 }
