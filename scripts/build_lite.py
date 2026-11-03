@@ -21,4 +21,25 @@ for d in DEPS:
     cmd += ["--with", d]
 cmd += ["jupyter", "lite", "build"]
 subprocess.run(cmd, cwd=LITE_SRC, check=True)
+
+# 给 JupyterLite 各页面加一个「加载太久」的提示（顺带显示捕获到的 JS 报错，方便截图排查）
+HELP = """<script id="agentcourse-slow-hint">
+(function () {
+  var errs = [];
+  addEventListener("error", function (e) { errs.push(String(e.message || (e.target && (e.target.src || e.target.href)) || e)); }, true);
+  addEventListener("unhandledrejection", function (e) { errs.push(String(e.reason && (e.reason.stack || e.reason.message) || e.reason)); });
+  setTimeout(function () {
+    if (document.querySelector(".jp-LabShell, .jp-NotebookPanel, .jp-DirListing, #main")) return;
+    var d = document.createElement("div");
+    d.style.cssText = "position:fixed;left:12px;right:12px;top:12px;z-index:99999;padding:14px 16px;border-radius:12px;background:#fff7ed;color:#7c2d12;border:1px solid #fdba74;font:14px/1.6 system-ui,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.12)";
+    d.innerHTML = "<b>Notebook 界面加载了 25 秒还没出来</b><br>1. 按 Ctrl+Shift+R（手机：下拉刷新）强制刷新一次；<br>2. 还不行：F12 → Application → Storage → Clear site data，再刷新；<br>3. 关掉翻译 / 划词类浏览器插件，或用无痕窗口打开；<br>4. 把这块提示截图发给老师。" +
+      (errs.length ? "<pre style='white-space:pre-wrap;font-size:12px;margin:8px 0 0;max-height:40vh;overflow:auto'>" + errs.slice(0, 8).join("\\n").replace(/[<&]/g, function (c) { return c === "<" ? "&lt;" : "&amp;"; }) + "</pre>" : "");
+    document.body.appendChild(d);
+  }, 25000);
+})();
+</script>"""
+for page in (ROOT / "lite").glob("*/index.html"):
+    html = page.read_text(encoding="utf-8")
+    if "agentcourse-slow-hint" not in html and "</head>" in html:
+        page.write_text(html.replace("</head>", HELP + "\n</head>", 1), encoding="utf-8")
 print("OK: JupyterLite 已构建到 lite/（记得 git add -A 提交）")

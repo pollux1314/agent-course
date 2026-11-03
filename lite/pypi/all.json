@@ -1,4 +1,30 @@
 {
+  "comm": {
+    "releases": {
+      "0.2.3": [
+        {
+          "comment_text": "",
+          "digests": {
+            "md5": "cb7196837f54f6a62586730c4460b2ce",
+            "sha256": "c615d91d75f7f04f095b30d1c1711babd43bdc6419c1be9886a85f2f4e489417"
+          },
+          "downloads": -1,
+          "filename": "comm-0.2.3-py3-none-any.whl",
+          "has_sig": false,
+          "md5_digest": "cb7196837f54f6a62586730c4460b2ce",
+          "packagetype": "bdist_wheel",
+          "python_version": "py3",
+          "requires_python": ">=3.8",
+          "size": 7294,
+          "upload_time": "2026-11-03T09:07:40.448229Z",
+          "upload_time_iso_8601": "2026-11-03T09:07:40.448229Z",
+          "url": "./comm-0.2.3-py3-none-any.whl",
+          "yanked": false,
+          "yanked_reason": null
+        }
+      ]
+    }
+  },
   "python-dotenv": {
     "releases": {
       "1.2.4": [

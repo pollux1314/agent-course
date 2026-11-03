@@ -399,9 +399,10 @@
     "litePluginSettings": {
       "@jupyterlite/pyodide-kernel-extension:kernel": {
         "pipliteUrls": [
-          "./pypi/all.json?sha256=75e463df62b0542a287906c66a297d3b9472d3544fd54c74ae150be1c3344e2e",
+          "./pypi/all.json?sha256=2a484a88efb75b305aea812cf4e24ccf4c2cd4eab992a8c8cd5d18ae46b7e311",
           "./extensions/@jupyterlite/pyodide-kernel-extension/static/pypi/all.json?sha256=94e75a51d1c49df7d0c23591188ff4a7ca5475efe7332814b3e5c4b980ef5a71"
-        ]
+        ],
+        "pyodideUrl": "/agent-course/pyodide/pyodide.mjs"
       }
     },
     "versionInfo": {

@@ -1,12 +1,21 @@
 {
   "LiteBuildConfig": {
-    "apps": ["notebooks", "tree", "lab"],
-    "contents": ["content"],
+    "apps": [
+      "notebooks",
+      "tree",
+      "lab"
+    ],
+    "contents": [
+      "content"
+    ],
     "output_dir": "../lite",
     "no_sourcemaps": true,
     "no_unused_shared_packages": true
   },
   "PipliteAddon": {
-    "piplite_urls": ["../pyodide/python_dotenv-1.2.4-py3-none-any.whl"]
+    "piplite_urls": [
+      "../pyodide/python_dotenv-1.2.4-py3-none-any.whl",
+      "wheels"
+    ]
   }
 }
