@@ -42,4 +42,14 @@ for page in (ROOT / "lite").glob("*/index.html"):
     html = page.read_text(encoding="utf-8")
     if "agentcourse-slow-hint" not in html and "</head>" in html:
         page.write_text(html.replace("</head>", HELP + "\n</head>", 1), encoding="utf-8")
+# JupyterLite 0.8 的 service worker 只在 activate 时读 enableCache；浏览器把空闲的 SW 回收后再唤醒，
+# 这个开关就变回 false，缓存形同虚设。改成脚本一加载就从自己的 URL 读，保证每次打开都能命中缓存。
+sw = ROOT / "lite" / "service-worker.js"
+src = sw.read_text(encoding="utf-8")
+OLD = 'let enableCache=!1;'
+NEW = 'let enableCache="true"===new URL(location.href).searchParams.get("enableCache");'
+if NEW not in src:
+    if OLD not in src:
+        sys.exit("service-worker.js 结构变了，没法打缓存补丁：检查 build_lite.py")
+    sw.write_text(src.replace(OLD, NEW, 1), encoding="utf-8")
 print("OK: JupyterLite 已构建到 lite/（记得 git add -A 提交）")

@@ -6,6 +6,7 @@
     "baseUrl": "./",
     "contentsAllJsonFile": "all.json",
     "defaultKernelName": "python",
+    "enableServiceWorkerCache": true,
     "faviconUrl": "./lab/favicon.ico",
     "federated_extensions": [
       {
