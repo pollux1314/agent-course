@@ -82,3 +82,7 @@ main { max-width: 820px; margin: 0 auto; padding: 14px; }
 .btn.ghost { background: var(--line); color: var(--text); }
 .toast { position: fixed; left: 50%; bottom: calc(24px + var(--safe-b)); transform: translateX(-50%); background: #111827; color: #fff; padding: 9px 16px; border-radius: 99px; font-size: 14px; z-index: 50; opacity: 0; transition: opacity .2s; pointer-events: none; }
 .toast.show { opacity: .95; }
+.codebox .bar a.nb { border-radius: 7px; padding: 6px 11px; font-size: 13px; background: #f59e0b; color: #1f2937; font-weight: 600; text-decoration: none; }
+.nb-banner { display: block; margin: 12px 0 16px; padding: 12px 14px; border-radius: 12px; background: linear-gradient(135deg, #f59e0b, #f97316); color: #fff; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.nb-banner b { display: block; font-size: 16px; }
+.nb-banner small { display: block; margin-top: 4px; opacity: .92; font-size: 12.5px; line-height: 1.45; }

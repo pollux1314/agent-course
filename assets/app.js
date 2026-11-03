@@ -69,6 +69,28 @@ function runPython(code, onMsg) {
 }
 
 // ---------- 代码块 ----------
+// 课程页的可运行代码块：默认只读展示（不建编辑器、不加载 Python），点「页内运行」才升级成编辑器
+const nbUrl = (day) => `lite/notebooks/index.html?path=day${String(day).padStart(2, "0")}.ipynb`;
+function makeLazyCodeBox(container, code, { storeKey, day }) {
+  const saved = storeKey ? localStorage.getItem(LS_CODE + storeKey) : null;
+  if (saved != null && saved !== code) { makeCodeBox(container, code, { runnable: true, storeKey, lang: "python" }); return; }  // 改过的代码直接给编辑器
+  const box = document.createElement("div"); box.className = "codebox";
+  const bar = document.createElement("div"); bar.className = "bar";
+  bar.innerHTML = `<span class="lang">python</span>`;
+  const btnCopy = mkBtn("复制"), btnNb = document.createElement("a"), btnRun = mkBtn("▶ 页内运行", "run");
+  btnNb.className = "nb"; btnNb.href = nbUrl(day); btnNb.target = "_blank"; btnNb.rel = "noopener"; btnNb.textContent = "📓 Notebook";
+  bar.append(btnCopy, btnNb, btnRun);
+  const pre = document.createElement("pre"); pre.textContent = code;
+  box.append(bar, pre);
+  btnCopy.onclick = () => copy(code);
+  btnRun.onclick = () => {
+    const ph = document.createElement("div"); box.replaceWith(ph);
+    const nbox = makeCodeBox(ph, code, { runnable: true, storeKey, lang: "python" });
+    nbox.querySelector("button.run").click();   // 升级成编辑器后直接运行一次
+  };
+  container.replaceWith(box);
+}
+
 function makeCodeBox(container, code, { runnable, storeKey, lang }) {
   const box = document.createElement("div"); box.className = "codebox";
   const bar = document.createElement("div"); bar.className = "bar";
@@ -123,6 +145,7 @@ function makeCodeBox(container, code, { runnable, storeKey, lang }) {
   }
   bar.querySelectorAll("button").forEach((b) => { if (b.textContent === "复制") b.onclick = () => copy(getCode()); });
   container.replaceWith(box);
+  return box;
 }
 function mkBtn(text, cls) { const b = document.createElement("button"); b.textContent = text; if (cls) b.className = cls; return b; }
 async function copy(text) {
@@ -133,7 +156,7 @@ async function copy(text) {
 // ---------- Markdown 渲染 ----------
 let blocks = [];
 marked.use({ renderer: { code(tok) { blocks.push(tok); return `<div class="code-ph" data-i="${blocks.length - 1}"></div>`; } } });
-function renderMarkdown(md, el, dayKey) {
+function renderMarkdown(md, el, dayKey, opts = {}) {
   blocks = [];
   el.innerHTML = marked.parse(md);
   el.querySelectorAll("a[href^='http']").forEach((a) => { a.target = "_blank"; a.rel = "noopener"; });
@@ -152,7 +175,8 @@ function renderMarkdown(md, el, dayKey) {
   el.querySelectorAll(".code-ph").forEach((ph) => {
     const tok = blocks[+ph.dataset.i]; const info = (tok.lang || "").trim().split(/\s+/);
     const runnable = info[0] === "python" && info.includes("run");
-    makeCodeBox(ph, tok.text, { runnable, lang: info[0] || "text", storeKey: runnable ? `${dayKey}:${runIdx++}` : null });
+    if (runnable && opts.day) makeLazyCodeBox(ph, tok.text, { storeKey: `${dayKey}:${runIdx++}`, day: opts.day });
+    else makeCodeBox(ph, tok.text, { runnable, lang: info[0] || "text", storeKey: runnable ? `${dayKey}:${runIdx++}` : null });
   });
 }
 
@@ -205,6 +229,7 @@ async function pageLesson(n) {
   $app.innerHTML = `<article class="lesson">
     <div class="sub">${dayLabel(l)} · ${dayDate(l.day)} · 阶段 ${ph.id} ${esc(ph.title)}</div>
     <h1>${esc(l.title)}${l.status === "outline" ? '<span class="badge">待更新</span>' : ""}</h1>
+    ${l.status === "ready" ? `<a class="nb-banner" href="${nbUrl(l.day)}" target="_blank" rel="noopener"><b>📓 在 JupyterLite 中打开本课 Notebook</b><small>整课代码都在里面，逐格运行、随便改；第一次打开要加载一会儿（约 20–30MB），之后有缓存</small></a>` : ""}
     <div id="md" class="muted">加载中…</div>
     <button class="lesson-done" id="done"></button>
     <div class="pager" id="pager"></div></article>`;
@@ -212,7 +237,7 @@ async function pageLesson(n) {
   const res = await fetch(`lessons/${l.file}`, { cache: "no-cache" });
   const md = await res.text();
   const el = document.getElementById("md"); el.classList.remove("muted");
-  renderMarkdown(md, el, `d${l.day}`);
+  renderMarkdown(md, el, `d${l.day}`, { day: l.day });
   const btn = document.getElementById("done");
   const paint = () => { const on = !!progress().done[l.day]; btn.classList.toggle("on", on); btn.textContent = on ? "✓ 本课已完成（点击撤销）" : "标记本课为已完成"; };
   btn.onclick = () => { setProgress((p) => { if (p.done[l.day]) delete p.done[l.day]; else p.done[l.day] = new Date().toISOString().slice(0, 10); }); paint(); if (progress().done[l.day]) toast("🎉 太棒了！"); };
@@ -253,7 +278,7 @@ function pageSettings() {
     <small>进度、练习勾选和你改过的代码都保存在本机浏览器里。换手机或清缓存前可以先导出。</small>
     <button class="btn ghost" id="export">导出进度</button><button class="btn ghost" id="import">导入进度</button><button class="btn ghost" id="reset">清空进度</button>
   </section>
-  <section class="card"><small class="muted">课程更新于 ${esc(INDEX.updated || "")}。浏览器里的 Python 由 Pyodide 提供（Python 3.14 / WebAssembly），首次运行需下载约 10MB，之后有缓存。</small></section>
+  <section class="card"><small class="muted">课程更新于 ${esc(INDEX.updated || "")}。课程代码推荐在 <a href="lite/tree/index.html" target="_blank" rel="noopener">📓 JupyterLite Notebook</a> 里运行（首次加载约 20–30MB，之后有缓存）；课程页的「页内运行」和练习场用 Pyodide（Python 3.14 / WebAssembly），点运行时才加载约 10MB。上面填的 Key 只给页内运行和练习场用，Notebook 里在第二格单独填。</small></section>
   </article>`;
   const ids = ["LLM_API_KEY", "LLM_BASE_URL", "LLM_MODEL", "PRICE_IN_PER_M", "PRICE_OUT_PER_M"];
   const $ = (id) => document.getElementById(id);

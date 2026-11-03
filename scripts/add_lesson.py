@@ -7,8 +7,10 @@
 
 - 已存在同一天的条目会被覆盖（status 改为 ready），不存在则按天数顺序插入。
 - 会同时把 index.json 的 updated 字段改成今天。
+- 最后自动运行 scripts/build_lite.py：生成这一课的 Notebook（jupyterlite/content/dayNN.ipynb）并重建 lite/。
+  加 --no-lite 可跳过（之后记得手动运行 python3 scripts/build_lite.py）。
 """
-import argparse, datetime, json, pathlib, shutil
+import argparse, datetime, json, pathlib, shutil, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LESSONS = ROOT / "lessons"
@@ -21,6 +23,7 @@ ap.add_argument("--summary", default="")
 ap.add_argument("--phase", type=int, help="默认按天数自动判断阶段")
 ap.add_argument("--day-end", type=int, help="跨多天的课，比如 13–14 天的阶段项目")
 ap.add_argument("--status", default="ready", choices=["ready", "outline"])
+ap.add_argument("--no-lite", action="store_true", help="不重建 JupyterLite Notebook")
 a = ap.parse_args()
 
 idx = json.loads((LESSONS / "index.json").read_text())
@@ -45,3 +48,7 @@ idx["lessons"].sort(key=lambda l: l["day"])
 idx["updated"] = datetime.date.today().isoformat()
 (LESSONS / "index.json").write_text(json.dumps(idx, ensure_ascii=False, indent=2) + "\n")
 print(f"OK: 第 {a.day} 天《{a.title}》→ lessons/{fname}（阶段 {phase}，{a.status}）")
+if not a.no_lite:
+    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_lite.py")])
+    if r.returncode != 0:
+        print("⚠️ Notebook / JupyterLite 构建失败，课程已登记；修好后运行 python3 scripts/build_lite.py", file=sys.stderr)

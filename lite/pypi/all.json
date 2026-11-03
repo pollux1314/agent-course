@@ -1,0 +1,28 @@
+{
+  "python-dotenv": {
+    "releases": {
+      "1.2.4": [
+        {
+          "comment_text": "",
+          "digests": {
+            "md5": "fc1378d45185a1b19e9f05a9b20cc5fd",
+            "sha256": "42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc"
+          },
+          "downloads": -1,
+          "filename": "python_dotenv-1.2.4-py3-none-any.whl",
+          "has_sig": false,
+          "md5_digest": "fc1378d45185a1b19e9f05a9b20cc5fd",
+          "packagetype": "bdist_wheel",
+          "python_version": "py3",
+          "requires_python": ">=3.10",
+          "size": 23266,
+          "upload_time": "2026-10-23T03:12:25.126951Z",
+          "upload_time_iso_8601": "2026-10-23T03:12:25.126951Z",
+          "url": "./python_dotenv-1.2.4-py3-none-any.whl",
+          "yanked": false,
+          "yanked_reason": null
+        }
+      ]
+    }
+  }
+}
