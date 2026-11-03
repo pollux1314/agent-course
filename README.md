@@ -77,7 +77,7 @@ lite/                   构建好的 JupyterLite 站点（提交进仓库，Page
 - 第一格「运行环境准备」按需 `%pip install`（pydantic / httpx / openai / tiktoken 来自 Pyodide 官方 CDN，python-dotenv 打包在 `lite/pypi/`），并打上和页内运行器相同的补丁（同步 httpx 走 XHR、`sys.argv` 固定、tiktoken 编码文件从本站 `pyodide/` 读）。
 - 调大模型的课多一格填 Key（只在浏览器内存里，不读设置页的 Key）。
 - `asyncio.run(main())` 自动改成 `await main()`（Notebook 里事件循环已在运行）。
-- Pyodide 核心和包从 `cdn.jsdelivr.net` 加载（首次约 20–30MB），国内网络偶尔会慢。
+- Pyodide 核心和包从 `cdn.jsdelivr.net` 加载（首次约 15MB），国内网络偶尔会慢。
 - 用户改过的 Notebook 存在浏览器里；课程更新后要看新版，在文件列表里删除自己的副本即可恢复。
 
 ## 本地预览

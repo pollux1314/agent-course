@@ -229,7 +229,7 @@ async function pageLesson(n) {
   $app.innerHTML = `<article class="lesson">
     <div class="sub">${dayLabel(l)} · ${dayDate(l.day)} · 阶段 ${ph.id} ${esc(ph.title)}</div>
     <h1>${esc(l.title)}${l.status === "outline" ? '<span class="badge">待更新</span>' : ""}</h1>
-    ${l.status === "ready" ? `<a class="nb-banner" href="${nbUrl(l.day)}" target="_blank" rel="noopener"><b>📓 在 JupyterLite 中打开本课 Notebook</b><small>整课代码都在里面，逐格运行、随便改；第一次打开要加载一会儿（约 20–30MB），之后有缓存</small></a>` : ""}
+    ${l.status === "ready" ? `<a class="nb-banner" href="${nbUrl(l.day)}" target="_blank" rel="noopener"><b>📓 在 JupyterLite 中打开本课 Notebook</b><small>整课代码都在里面，逐格运行、随便改；第一次打开要加载一会儿（约 15MB），之后有缓存</small></a>` : ""}
     <div id="md" class="muted">加载中…</div>
     <button class="lesson-done" id="done"></button>
     <div class="pager" id="pager"></div></article>`;
@@ -278,7 +278,7 @@ function pageSettings() {
     <small>进度、练习勾选和你改过的代码都保存在本机浏览器里。换手机或清缓存前可以先导出。</small>
     <button class="btn ghost" id="export">导出进度</button><button class="btn ghost" id="import">导入进度</button><button class="btn ghost" id="reset">清空进度</button>
   </section>
-  <section class="card"><small class="muted">课程更新于 ${esc(INDEX.updated || "")}。课程代码推荐在 <a href="lite/tree/index.html" target="_blank" rel="noopener">📓 JupyterLite Notebook</a> 里运行（首次加载约 20–30MB，之后有缓存）；课程页的「页内运行」和练习场用 Pyodide（Python 3.14 / WebAssembly），点运行时才加载约 10MB。上面填的 Key 只给页内运行和练习场用，Notebook 里在第二格单独填。</small></section>
+  <section class="card"><small class="muted">课程更新于 ${esc(INDEX.updated || "")}。课程代码推荐在 <a href="lite/tree/index.html" target="_blank" rel="noopener">📓 JupyterLite Notebook</a> 里运行（首次加载约 15MB，之后有缓存）；课程页的「页内运行」和练习场用 Pyodide（Python 3.14 / WebAssembly），点运行时才加载约 10MB。上面填的 Key 只给页内运行和练习场用，Notebook 里在第二格单独填。</small></section>
   </article>`;
   const ids = ["LLM_API_KEY", "LLM_BASE_URL", "LLM_MODEL", "PRICE_IN_PER_M", "PRICE_OUT_PER_M"];
   const $ = (id) => document.getElementById(id);
